@@ -40,5 +40,5 @@ jobs:
         env:
           REPO: git@github.com:cgrotz/cgrotz.github.io.git
           BRANCH: blog
-          FOLDER: build
+          FOLDER: public
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
