@@ -149,6 +149,17 @@ MQTTClient <span class="token function">client</span><span class="token punctuat
   client<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">"command///req/#"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token comment">// ...</span>
 <span class="token punctuation">}</span></code></pre></div>
+<p>In the <em>messageReceived</em> function, I am using ArduinoJson to extract the JSON payload. Let’s have a quick look at the typical message structure Eclipse Ditto is using (on which Bosch IoT Things is build on top). There are four keys that are making the basic message frame topic, headers, path and value. Topic identifies what kind of message we are receiving, while path identifies which part of the Digital Twin is the origin of the message. Headers is a key-value map with meta information for message procssing (just like in HTTP requests). Value contains the payload that we are interessted in. You can find more information regarding the protocol in the Eclipse Ditto <a href="https://www.eclipse.org/ditto/protocol-overview.html">documentation</a>.</p>
+<div class="gatsby-highlight" data-language="json"><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+	<span class="token property">"topic"</span><span class="token operator">:</span> <span class="token string">"namespace/thing_id/type_of_message"</span><span class="token punctuation">,</span> 
+	<span class="token property">"headers"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    ...
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token property">"path"</span><span class="token operator">:</span> <span class="token string">"path_relating_to_feature"</span><span class="token punctuation">,</span>
+	<span class="token property">"value"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    ...
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>Congratulations, you are now able to send and receive message to and from the IoT Suite. A possible improvement would of course be to check the IoT Hub’s certificate for authenticity. But I will leave this to you. </p>
 <p>The following is a slightly cleaned up full example of what we just did. We will use this in the next post to continue the integration work. You can find the complete project on <a href="https://www.github.com/cgrotz/esp32-iot-hub-connection">Github</a>.</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;Arduino.h></span></span>
