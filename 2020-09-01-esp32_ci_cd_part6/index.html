@@ -4,7 +4,7 @@
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;HTTPClient.h></span>   <span class="token comment">// The HTTP Client for downloading the firmware</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;Stream.h></span>       <span class="token comment">// We need this for streaming the file to the flash</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;StreamString.h></span></span></code></pre></div>
-<p>When a Distribution Set is assigned to a target in IoT Rollouts, IoT Manager will translate this into an install command on the device shadow in case that the Device shadow has a <a href="https://vorto.eclipse.org/#/details/org.eclipse.hawkbit.swupdatable:SoftwareUpdatable:2.0.0">SoftwareUpdatable</a> Vorto Function Block. So step 1 is registering the SoftwareUpdateable Functionblock. Let’s extend the connect function to update the Device shadow.</p>
+<p>When a distribution set is assigned to a target in IoT Rollouts, IoT Manager will translate this into an install command on the device shadow in case that the device shadow has a <a href="https://vorto.eclipse.org/#/details/org.eclipse.hawkbit.swupdatable:SoftwareUpdatable:2.0.0">SoftwareUpdatable</a> function block. (Version 1 of the Vorto Functionblock will only be supported during the public Beta of the Device Management Package) So step 1 is registering the SoftwareUpdateable function block. Let’s extend the connect function to update the device shadow.</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">//...</span>
 
@@ -60,7 +60,7 @@
 		<span class="token punctuation">}</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>The key elements that we will need to process are the path property, the correlationId of the software installation request <em>value.arg_0.correlationId</em> and the url to the artifact <em>value.arg_0.softwareModules.[].artifacts.[].links.download.https</em>. Let’s add the handling code with some global variables for processing the message.</p>
+<p>The key elements that we will need to process are the path property, the correlationId of the software installation request <em>value.arg_0.correlationId</em> and the url to the artifact <em>value.arg_0.softwareModules.[].artifacts.[].links.download.https</em>. Let’s add the handling code with some global variables for processing the message. (The arg_0 will be replaced after the public beta with the correct property name).</p>
 <div class="gatsby-highlight" data-language="cpp"><pre class="language-cpp"><code class="language-cpp"><span class="token comment">// New global variables</span>
 String INSTALLATION_PATH <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span><span class="token string">"/features/softwareupdatable/inbox/messages/install"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -166,7 +166,7 @@ String <span class="token function">buildInstallationState</span><span class="to
 <h2>Conclusion</h2>
 <p>Voilà, we are at the end. Pushed to the master branch in Github will now create a new firmware image, that is automatically pushed to the Bosch IoT Suite, which in turn automatically assigns it to the device, the device will then self update.</p>
 <p>There is a lot of room for improvement for this simple example. Let’s make a short list of a few points I would consider. I bet there are many more that you might come up with.</p>
-<h3>Device Configuration not externalized</h3>
+<h3>device Configuration not externalized</h3>
 <p>In the above code, the Wifi configuration as well as the device credentials are hard coded into the code. This should be externalized to the flash or a SD storage. This way the firmware image is not device specific anymore.</p>
 <h3>Resilience for firmware flashing</h3>
 <p>At the moment the firmware image is downloaded and directly streamed to the ESP32’s unused firmware partition. Since the ESP32 uses a two partition concept for firmware update and checks the partition, we already have some resilience (<a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ota.html">OTA Process Documentation</a>. It would still be good to download the file and verify the downloaded image against the checksum.</p>
