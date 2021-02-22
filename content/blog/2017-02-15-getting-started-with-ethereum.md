@@ -3,6 +3,7 @@ layout: post
 title:  "Getting Started with Ethereum"
 date:   2017-02-15 10:13:00 +0200
 categories: Blockchain Ethereum
+type: blog
 ---
 So, you want to get started with [Ethereum][ethereum]? I found that when experimenting with blockchain as a developer it’s best, to setup your own private mini blockchain. I will do this steps on MacOS, depending on your operating system, some of the steps could be different for you.
 

@@ -3,6 +3,7 @@ layout: post
 title:  "Using RTOS tasks on ESP32 under Arduino"
 date:   2018-01-14 10:13:00 +0200
 categories: General IoT
+type: blog
 ---
 Today I got my first set of ESP 32 boards from AliExpress, and they are a beauty. If you don’t know the ESP32 yet, it’s the successor of the ESP8266 from Espressif Systems which is a love child of the IoT prototyping community.
 

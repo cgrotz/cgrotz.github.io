@@ -3,6 +3,7 @@ layout: post
 title:  "How to run a trained Tensorflow model on Cloud Foundry"
 date:   2017-04-09 10:13:00 +0200
 categories: Cloud General "Machine Learning" Tensorflow
+type: blog
 ---
 AI models are becoming more and more commodity nowadays. This entry is focusing on, how you can train a Tensorflow model offline and push it to Cloud Foundry to provide your model as an API. Our starting point is the very good beginner sample for MNIST image recognition from Tensorflow itself [MNIST Getting Started][Tensorflow MNIST Getting Started]
 

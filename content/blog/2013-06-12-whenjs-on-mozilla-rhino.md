@@ -3,6 +3,7 @@ layout: post
 title:  "Whenjs On Mozilla Rhino"
 date:   2013-06-12 10:13:00 +0200
 categories: General js Rhino
+type: blog
 ---
 Recently I stumpled up on when.js, a great way of doing concurrency in Javascript with a very easy syntax.
 
