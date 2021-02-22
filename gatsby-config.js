@@ -8,7 +8,7 @@ module.exports = {
     description: `A blog about digital stuff.`,
     siteUrl: `https://cgrotz.github.io/`,
     social: {
-      twitter: `cgrotz`,
+      twitter: `christoph_grotz`,
     },
   },
   plugins: [
@@ -17,6 +17,13 @@ module.exports = {
       options: {
         path: `${__dirname}/content/blog`,
         name: `blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/tech`,
+        name: `tech`,
       },
     },
     {

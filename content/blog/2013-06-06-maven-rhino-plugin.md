@@ -4,6 +4,7 @@ title:  "Rhino Maven Plugin Release"
 description: "Building maven artifacts from javascript sources"
 date:   2013-06-06 10:13:00 +0200
 categories: General js Rhino
+type: blog
 ---
 rhino-maven-plugin is a Maven plugin to compile Javascript to Java class file using Mozilla Rhino. The compiled classes require Mozilla Rhino to run. The plugin is licensed under the Mozilla Public License 2.0 due to MPL being the license for Rhino
 
