@@ -25,7 +25,7 @@ export function radar_visualization(element, config) {
 
   // custom random number generator, to make random sequence reproducible
   // source: https://stackoverflow.com/questions/521295
-  var seed = 42;
+  var seed = 123;
   function random() {
     var x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);

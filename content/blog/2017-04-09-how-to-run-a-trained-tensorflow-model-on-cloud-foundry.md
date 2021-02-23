@@ -11,10 +11,10 @@ You can get the sources of this examples from my Github repository. [Source on G
 
 The first thing to do, is to add the following lines at the end of your training code:
 
-{% highlight python %}
+```python
 saver = tf.train.Saver()
 saver.save(sess, "model/trained.ckpt")
-{% endhighlight %}
+```
 
 This saves the currently trained model into the folder model as the trained checkpoint. Which allows you to reload the model later.
 
@@ -24,25 +24,25 @@ You can see the whole code in the run.py file. I’m going to highlight the main
 
 First of all, we need to normally init the variables and model we are going to run.
 
-{% highlight python %}
+```python
 # This is the model
 x = tf.placeholder(tf.float32, [None, 784])
 W = tf.Variable(tf.zeros([784, 10]), name = 'W')
 b = tf.Variable(tf.zeros([10]), name = 'b')
 y = tf.nn.softmax(tf.matmul(x, W) + b)
-{% endhighlight %}
+```
 
 Next we are going to load the previously stored value for the variables. This recreates the model we previously trained.
 
-{% highlight python %}
+```python
 #Load the stored model
 saver = tf.train.Saver()
 saver.restore(sess, "model/trained.ckpt")
-{% endhighlight %}
+```
 
 Afterwards we create our Flask request handler.
 
-{% highlight python %}
+```python
 #A request handler for calling the Tensorflow model
 @app.route('/', methods=['POST'])
 def process_call():
@@ -52,7 +52,7 @@ def process_call():
     return jsonify(
         sess.run(y, feed_dict={x: input}).flatten().tolist()
     )
-{% endhighlight %}
+```
 
 That’s all, if you have installed Tensorflow and Flask you can now simply run python run.py  to start the API locally.
 
@@ -64,33 +64,33 @@ Our application is now like every other Python app, we want to run on Cloud Foun
 
 requirements.txt – This file contains the libraries that PIP should install. PIP is run by the Python buildpack while creating the droplet. The content should look like the following lines:
 
-{% highlight python %}
+```python
 tensorflow==1.0.1
 Flask==0.12.1
 gunicorn==19.7.1
-{% endhighlight %}
+```
 
 runtime.txt – This file contains which Python version to use. Our example needs python 3.4 to run. The content should look like the following lines:
 
-{% highlight python %}
+```python
 python-3.6.0
-{% endhighlight %}
+```
 
 Procfile – This file gives the command line with which the buildpack should start the application
 
-{% highlight python %}
+```python
 web: gunicorn run:app --log-file=-
-{% endhighlight %}
+```
 
 When you have configured those files, you can simple push your app using cf-cli from the folder:
 
-{% highlight sh %}
+```shell
 cf push <app_name>
-{% endhighlight %}
+```
 
 Now let’s make a test request to our  AI API. For example the following json array is the letter 3 or at least my painting of the letter 3 using paint and a touchpad.
 
-{% highlight json %}
+```javascript
 [ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 
   0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 
   0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 
@@ -119,11 +119,11 @@ Now let’s make a test request to our  AI API. For example the following json a
   0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
   0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-{% endhighlight %}
+```
 
 You can simply POST it against your newly created Cloud Foundry app,  just set the Content-Type header to application/json so that the content is automatically read. The response should look like the following
 
-{% highlight json %}
+```javascript
 [
    0.0000050957642088178545,
    1.7136410376778844e-15,
@@ -136,7 +136,7 @@ You can simply POST it against your newly created Cloud Foundry app,  just set t
    0.0015830846969038248,
    5.507514888591913e-9
 ]
-{% endhighlight %}
+```
 
 In this example the 3 was actually correctly detected, hurray. Of course you can make the API fancier and maybe add some authentication and authorisation to it. Maybe you also want to add a billing option to earn some money with your awesome model.
 

@@ -10,7 +10,7 @@ rhino-maven-plugin is a Maven plugin to compile Javascript to Java class file us
 
 Maven Distribution
 
-{% highlight xml %}
+```xml
 <build>
   <plugins>
     <plugin>
@@ -20,10 +20,10 @@ Maven Distribution
     </plugin>
   </plugins>
 </build>
-{% endhighlight %}
+```
 You can start the compilation be simply calling mvn rhino:compile or by adding the following to the plugin tag:
 
-{% highlight xml %}
+```xml
 <executions>
   <execution>
     <phase>compile</phase>
@@ -32,14 +32,14 @@ You can start the compilation be simply calling mvn rhino:compile or by adding t
     </goals>
   </execution>
 </executions>
-{% endhighlight %}
+```
 Mozilla Rhino as dependency
 
-{% highlight xml %}
+```xml
 <dependency>
   <groupId>org.mozilla</groupId>
   <artifactId>rhino</artifactId>
   <version>1.7R4</version>
 </dependency>
-{% endhighlight %}
+```
 The artifact is deployed to Maven Central so no repository configuration should be necessary.
