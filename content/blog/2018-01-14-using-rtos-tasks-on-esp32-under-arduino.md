@@ -24,7 +24,7 @@ The specs are amazing, it seems Espressif took everything the community love abo
 
 The Espressif IoT Development Framework (Link) includes FreeRTOS, and you can conveniently use it from the Arduino ID. Simply create and delete FreeRTOS tasks using the well known commands.
 
-{% highlight c %}
+```c
 void setup() {
   Serial.begin(115200);
   xTaskCreate(readSensor, "ReadSensorTask", 10000, NULL, 1, NULL);
@@ -43,7 +43,7 @@ void readSensor( void * parameter ) {
       delay(1000);
     }
 }
-{% endhighlight %}
+```
 
 The first parameter of the [xTaskCreate][xTaskCreate Documentation] function takes the pointer to the function that implements this task. The second parameter is the task name, the name can be used for debugging, but could also be used for retrieving a task handle. The third parameter is the stack size that should be allocated for this task, determining the stack size can be a challenging task [Link][FreeRTOS Stack Size]. The fourth parameter is a value that is passed to the task as a parameter. The fifth task is the priority of the task. The sixth parameter can be passed in to obtain a handle on the task directly.
 

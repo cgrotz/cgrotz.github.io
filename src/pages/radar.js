@@ -76,34 +76,10 @@ const BlogIndex = ({ data, location }) => {
   return (
     <FullLayout location={location} title={siteTitle}>
       <SEO title="Tech Radar" />
+      <p>
+        I am currently setting up this tech radar, so it may look a little empty at the moment. Please stay tuned.
+      </p>
       <svg ref={svgRef}></svg>
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
-        return (
-          <article key={node.fields.slug}>
-            <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <pill></pill>
-              <small>{node.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </section>
-          </article>
-        )
-      })}
     </FullLayout>
   )
 }

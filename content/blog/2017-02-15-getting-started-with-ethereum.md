@@ -11,12 +11,12 @@ The first step is in installing the Geth command line tool on your computer. Get
 
 For Mac users it’s a good to choose the Homebrew installation. It’s brings along everything you need. For other systems, you can find the very simple instructions here [ethereum-cli]
 
-{% highlight sh %}
+```shell
 brew update
 brew upgrade
 brew tap ethereum/ethereum
 brew install ethereum
-{% endhighlight %}
+```
 
 After that, you should install the Ethereum Wallet to interact with the Ethereum network. You can simply download the Ethereum Wallet from the Github Releases page. [ethereum-mist]
 
@@ -24,7 +24,7 @@ The Wallet will run a Geth node in the Background, and interact with this node v
 
 For that, you have to go to the command line. And create a folder called datadir. This folder will be used by our Geth node for storing all the data. Next thing we have to do, is to create a genesis.json file. This file contains the information for the Genesis Block. Which means the first Block of our Blockchain. Because we don’t want to start poor in our Blockchain tests, we maybe want to mint some money. The content of the genesis.file should look like this:
 
-{% highlight json %}
+```json
 {
 	"config": {
 		"homesteadBlock": 10
@@ -43,24 +43,24 @@ For that, you have to go to the command line. And create a folder called datadir
 		}
 	}
 }
-{% endhighlight %}
+```
 
 The next step is to use this genesis file to init the genesis block on your node. To do this, execute the following command on the console:
 
-{% highlight sh %}
+```
 geth --datadir "<location of your datadir>" init <path to genesis file>
-{% endhighlight %}
+```
 
 Now you can start your private Geth node with the following command (please replace the location of your data dir and the ethereum folder):
 
-{% highlight sh %}
+```shell
  geth --datadir "<location of your datadir>" \\ 
 --networkid 9 \\
 --port "30303" --nodiscover --autodag \\
 --rpc --rpcport "8545" --rpccorsdomain "*"--rpcaddr "0.0.0.0" \\
 --ipcpath <path to ethereum folder>/geth.ipc \\
 console<
-{% endhighlight %}
+```
 
 Let’s dissect this command.
 –datadir provides the location of the data dir, that holds the local Blockhain copy
@@ -84,23 +84,23 @@ Okay, so we now have started our very first Ethereum node, and you should see a 
 
 To check if your node is working correctly, you can for example use
 
-{% highlight c %}
+```javascript
 eth.accounts
-{% endhighlight %}
+```
 
 to get an array of all the addresses installed with your Geth node.
 
-{% highlight c %}
+```javascript
 ["0xd4bf167a7f595d3c4d1502dd82408eabe96b7ff3", 
 "0x68d40b98b247cdda1ac6c44870fce3dce91571ae", 
 "0xb190456d0078f47c5cb9ea3701de9c6a9cdb3e44"]
-{% endhighlight %}
+```
 
 If you want to check the balance of a address you can simply use:
 
-{% highlight c %}
+```javascript
 web3.fromWei(eth.getBalance("<address>"), "ether");
-{% endhighlight %}
+```
 
 Now let’s start the Ethereum Wallet again. After login you should see something like this:
 
@@ -118,33 +118,33 @@ Well, there is no miner running on our network yet, that generates new blocks. W
 
 We can start mining of new blocks on our local node by simply executing the following command in the console window:
 
-{% highlight c %}
+```javascript
 web3.miner.start()
-{% endhighlight %}
+```
 
 Because we don’t want to generate millions of blocks without transactions, we should stop mining of new blocks afterwards.
 
-{% highlight c %}
+```javascript
 web3.miner.stop()
-{% endhighlight %}
+```
 
 That’s it. We created our private blockchain. If you want to add nodes to your network, you can follow the steps from above. Create a second folder datadir2 and copy the genesis file to it. You will also need the enode url from your originally created first Geth node. Go back to the console window of your Geth node and execute the following command:
 
-{% highlight c %}
+```javascript
 admin.nodeInfo.enode
-{% endhighlight %}
+```
 
 This will output the enode url, that contains the following information:
 
-{% highlight c %}
+```javascript
 enode://nodekey@ip:port
-{% endhighlight %}
+```
 
 For a second node, we first have to init the genesis block of our chain, and then we can start our node. Pass this in the commands to start a your second Geth node:
 
-{% highlight c %}
+```javascript
 geth --datadir "<location of your datadir2>" init <path to genesis file>;
-{% endhighlight %}
+```
 
 That’s it, now you have a multi-node Ethereum cluster.
 
