@@ -17,6 +17,9 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
+      <div className="entry-metadata">
+        Posted on <time datetime={post.frontmatter.date} class="published">{post.frontmatter.date}</time>
+      </div>
       <article>
         <header>
           <h1
@@ -43,9 +46,6 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             marginBottom: rhythm(1),
           }}
         />
-        <div className="entry-metadata">
-          Posted on <time datetime={{post.frontmatter.date}} class="published">{post.frontmatter.date}</time>
-        </div>
         <footer>
           <Bio />
         </footer>
@@ -96,7 +96,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date
         description
       }
     }
