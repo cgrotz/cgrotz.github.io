@@ -44,7 +44,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           }}
         />
         <div className="entry-metadata">
-          Posted on <span className="entry-date published">{post.frontmatter.date}</span> 
+          Posted on <time datetime={{post.frontmatter.date}} class="published">{post.frontmatter.date}</time>
         </div>
         <footer>
           <Bio />
