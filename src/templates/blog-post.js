@@ -43,8 +43,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             marginBottom: rhythm(1),
           }}
         />
-        <div class=”postmetadata”>
-          Posted on <span class=”updated”>{post.frontmatter.date}</span> 
+        <div className="postmetadata">
+          Posted on <span className="updated">{post.frontmatter.date}</span> 
         </div>
         <footer>
           <Bio />
